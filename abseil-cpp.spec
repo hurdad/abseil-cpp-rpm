@@ -1,5 +1,5 @@
 Name:           abseil-cpp
-Version:		%{VERSION}
+Version:	%{VERSION}
 Release:        %{RELEASE}%{?dist}
 Summary:        Abseil Common Libraries (C++)
 License:        Apache 2
@@ -7,7 +7,7 @@ Group:          Development/Libraries/C and C++
 Url:            http://abseil.io
 Source:         %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:  cmake
+BuildRequires:  cmake3
 
 %description
 TensorFlow is an open source software library for numerical computation using data flow graphs.
@@ -21,16 +21,13 @@ Requires:   %{name}%{?_isa} = %{version}-%{release}
 This package contains the development headers and library for %{name}.
 
 %prep
-%setup -n %{name}-%{version}
+%setup -n %{name}-daf381e8535a1f1f1b8a75966a74e7cca63dee89
 
 %build
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
-mkdir -p $RPM_BUILD_ROOT%{_includedir}
-cp -r absl $RPM_BUILD_ROOT%{_includedir}
-find $RPM_BUILD_ROOT%{_includedir}/absl -type f  ! -name "*.h" -delete
+%make_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -47,6 +44,8 @@ ldconfig
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/absl
+%{_includedir}
+%{_libdir}/*.a
+%{_libdir}/cmake/*
 
 %changelog

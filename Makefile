@@ -3,7 +3,7 @@ version = 20180600
 release = 1
 name = abseil-cpp
 full_name = $(name)-$(version)
-download_url = "https://github.com/abseil/$(name)/archive/$(version).tar.gz"
+download_url = https://github.com/abseil/abseil-cpp/archive/daf381e8535a1f1f1b8a75966a74e7cca63dee89.tar.gz
 
 all: rpm
 
